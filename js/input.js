@@ -56,18 +56,18 @@ class MapboxGeojson {
       })
   }
   getLocalitiesByText () {
-    if (!this.hasErrors()) {
-      const requestText = encodeURI(this.street.value + ' ' + this.city.value + ' ' + this.state.value + ' ' + this.zip.value)
-      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${requestText}.json?access_token=${this.key}&limit=1`)
-        .then(res => {
-          // re-center the map
-          console.log(res.data.features[0])
-          const data = res.data.features[0]
-          this.map.easeTo({ center: res.data.features[0].center })
-          this.getLocalityByLngLat(data.center[0], data.center[1])
-          this.setValue()
-        })
-    }
+    // if (!this.hasErrors()) {
+    const requestText = encodeURI(this.street.value + ' ' + this.city.value + ' ' + this.state.value + ' ' + this.zip.value)
+    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${requestText}.json?access_token=${this.key}&limit=1`)
+      .then(res => {
+        // re-center the map
+        console.log(res.data.features[0])
+        const data = res.data.features[0]
+        this.map.easeTo({ center: res.data.features[0].center })
+        this.getLocalityByLngLat(data.center[0], data.center[1])
+        this.setValue()
+      })
+    // }
   }
   clearData () {
     this.street.value = ''
@@ -111,7 +111,7 @@ class MapboxGeojson {
       lng: this.lng
     }
     value = JSON.stringify(value)
-    console.log(value)
+
     const field = document.querySelector('#mapbox-geojson-value__' + this.fieldKey)
     // console.log(field)
     field.value = value

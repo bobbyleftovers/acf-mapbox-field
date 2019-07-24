@@ -330,9 +330,9 @@ class acf_field_mapbox_geojson extends acf_field {
     *  @param   $field (array) the field array holding all the field options
     *  @return  $value
     */
-    /*function load_value( $value, $post_id, $field ) {
+    function load_value( $value, $post_id, $field ) {
         return $value;
-    }*/
+    }
 
     /*
     *  update_value()
@@ -368,7 +368,7 @@ class acf_field_mapbox_geojson extends acf_field {
     *
     *  @return  $value (mixed) the modified value
     */
-    /*function format_value( $value, $post_id, $field ) {
+    function format_value( $value, $post_id, $field ) {
 
         // bail early if no value
         if( empty($value) ) {
@@ -385,7 +385,7 @@ class acf_field_mapbox_geojson extends acf_field {
 
         // return
         return $value;
-    }*/
+    }
 
     /*
     *  validate_value()
@@ -452,9 +452,9 @@ class acf_field_mapbox_geojson extends acf_field {
     *  @return  $field
     */
 
-    /*function load_field( $field ) {
+    function load_field( $field ) {
         return $field;
-    }*/
+    }
 
 
     /*
