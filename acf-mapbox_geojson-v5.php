@@ -157,24 +157,8 @@ class acf_field_mapbox_geojson extends acf_field {
         ];?>
         <div id="mapbox-geojson">
             <div class="mapbox-geojson__search-wrap">
-                <div class="mapbox-geojson__input-wrap">
-                    <div class="acf-label mapbox-geojson__label">Street</div>
-                    <div class="acf-input">
-                        <div class="acf-input-wrap">
-                            <input class="mapbox-geojson__street mapbox-geojson__input" type="text" name="mapbox-geojson__street-<?= esc_attr($field['name']) ?>" value="" placeholder="ex: 80 South St"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="mapbox-geojson__input-wrap">
-                    <div class="acf-label mapbox-geojson__label">City</div>
-                    <div class="acf-input">
-                        <div class="acf-input-wrap">
-                            <input class="mapbox-geojson__city mapbox-geojson__input" type="text" name="mapbox-geojson__city-<?= esc_attr($field['name']) ?>" value="" placeholder="ex: Arlington"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="mapbox-geojson__input-wrap">
-                    <div class="acf-label mapbox-geojson__label">State</div>
+                <div class="mapbox-geojson__state mapbox-geojson__input-wrap">
+                    <div class="acf-label label mapbox-geojson__label">State</div>
                     <div class="acf-input">
                         <div class="acf-input-wrap">
                             <select class="mapbox-geojson__state mapbox-geojson__input" type="text" name="mapbox-geojson__state-<?= esc_attr($field['name']) ?>" value="">
@@ -186,23 +170,43 @@ class acf_field_mapbox_geojson extends acf_field {
                         </div>
                     </div>
                 </div>
-                <div class="mapbox-geojson__input-wrap">
-                    <div class="acf-label mapbox-geojson__label">Postal Code</div>
+
+                <div class="mapbox-geojson__city mapbox-geojson__input-wrap">
+                    <div class="acf-label label mapbox-geojson__label">City</div>
+                    <div class="acf-input">
+                        <div class="acf-input-wrap">
+                            <input class="mapbox-geojson__city mapbox-geojson__input" type="text" name="mapbox-geojson__city-<?= esc_attr($field['name']) ?>" value="" placeholder="ex: Arlington"/>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="mapbox-geojson__street mapbox-geojson__input-wrap">
+                    <div class="acf-label label mapbox-geojson__label">Street</div>
+                    <div class="acf-input">
+                        <div class="acf-input-wrap">
+                            <input class="mapbox-geojson__street mapbox-geojson__input" type="text" name="mapbox-geojson__street-<?= esc_attr($field['name']) ?>" value="" placeholder="ex: 80 South St"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mapbox-geojson__zip mapbox-geojson__input-wrap">
+                    <div class="acf-label label mapbox-geojson__label">Zip</div>
                     <div class="acf-input">
                         <div class="acf-input-wrap">
                             <input class="mapbox-geojson__zip mapbox-geojson__input" type="text" name="mapbox-geojson__zip-<?= esc_attr($field['name']) ?>" value="" placeholder="ex: 02554"/>
                         </div>
                     </div>
                 </div>
-                <div class="mapbox-geojson__input-wrap">
-                    <div class="acf-label">Click to center map</div>
-                    <button id="mapbox-geojson__find" class="mapbox-geojson__button button--find" data-access-token="<?= esc_attr($field['mapbox_access_token']) ?>">Search</button>
-                    <button id="mapbox-geojson__clear" class="mapbox-geojson__button button--clear" data-access-token="<?= esc_attr($field['mapbox_access_token']) ?>">Clear</button>
+                <div class="mapbox-geojson__buttons mapbox-geojson__input-wrap">
+                    <button id="mapbox-geojson__find" class="mapbox-geojson__button button button--find" data-access-token="<?= esc_attr($field['mapbox_access_token']) ?>">Search</button>
+                    <div class="text-center pads clear-wrap">
+                        <a id="mapbox-geojson__clear" class="mapbox-geojson__button button--clear" data-access-token="<?= esc_attr($field['mapbox_access_token']) ?>"><span class="load-icon"></span> Clear Location</a>
+                    </div>
                 </div>
             </div>
-            <input id="mapbox-geojson-value__<?= esc_attr($field['key']) ?>" class="mapbox-geojson-value" type="hidden" name="<?= esc_attr($field['name']) ?>" value='<?= $field['value'] ?>' />
+            <input id="mapbox-geojson-value__<?= esc_attr($field['key']) ?>" class="mapbox-geojson-value" type="text" name="<?= esc_attr($field['name']) ?>" value='<?= $field['value'] ?>' />
             <div class="mapbox-geojson-map-container">
-                <div id="mapbox-geojson-map" class="mapbox-geojson-map" data-access-token="<?= esc_attr($field['mapbox_access_token']) ?>" data-map-style="<?= esc_attr($field['mapbox_map_style']) ?>" style="height:<?= $field['height'] ?>px;"></div>
+                <div id="mapbox-geojson-map" class="mapbox-geojson-map" data-access-token="<?= esc_attr($field['mapbox_access_token']) ?>" data-map-style="<?= esc_attr($field['mapbox_map_style']) ?>" <?php echo (is_admin()) ? 'style="height:'. $field['height'] .'px;"' : null; ?>></div>
             </div>
         </div>
         <?php
@@ -227,11 +231,11 @@ class acf_field_mapbox_geojson extends acf_field {
         // register & include JS
         wp_enqueue_script( 'acf-input-mapbox_geojson_axios', 'https://unpkg.com/axios/dist/axios.min.js', array(), null );
         wp_enqueue_script( 'acf-input-mapbox_geojson_mapbox_js', 'https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.1/mapbox-gl.js' );
-        wp_enqueue_script( 'acf-input-mapbox_geojson', "{$dir}js/input.js", array('acf-input-mapbox_geojson_mapbox_js', 'acf-input-mapbox_geojson_axios'), '0.0.3', true );
+        wp_enqueue_script( 'acf-input-mapbox_geojson', "{$dir}assets/main.min.js", array('acf-input-mapbox_geojson_mapbox_js', 'acf-input-mapbox_geojson_axios'), '0.0.3', true );
 
         // register & include CSS
         wp_enqueue_style( 'acf-input-mapbox_geojson_mapbox_css', 'https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css');
-        wp_enqueue_style( 'acf-input-mapbox_geojson', "{$dir}css/input.css", array(), '0.0.3' );
+        wp_enqueue_style( 'acf-input-mapbox_geojson', "{$dir}assets/main.min.css", array(), '0.0.3' );
     }
 
 
