@@ -9,7 +9,7 @@ Fill out the text fields and click search. The map should recenter and drop a pi
 ## What You Need
 To get started, you will need Advanced custom fields, of course. You will also need an account with [Mapbox](https://www.mapbox.com/). Once your account is created you can create a map token on your [account page](https://account.mapbox.com/) and a map style as well. There are some default options for Mapbox styles or you can [create one in the studio](https://studio.mapbox.com/). Add your token and map style to the field when you add it to your group. You should be good to go.
 
-## To-Dos
+### To-Do
 - When adding this field to a group, add 'req'd field' switches for the text entry fields.
 - Add options to determine which text fields are saved and which are just used for queries.
 - (This one might not work out) Allow the field to be saved as either JSON or to multiple postmeta fields.
