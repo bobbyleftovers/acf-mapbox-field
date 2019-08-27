@@ -9,9 +9,13 @@ Fill out the text fields and click search. The map should recenter and drop a pi
 ## What You Need
 To get started, you will need Advanced custom fields, of course. You will also need an account with [Mapbox](https://www.mapbox.com/). Once your account is created you can create a map token on your [account page](https://account.mapbox.com/) and a map style as well. There are some default options for Mapbox styles or you can [create one in the studio](https://studio.mapbox.com/). Add your token and map style to the field when you add it to your group. You should be good to go.
 
+## Installing
+This extension uses webpack and npm ti manage dependencies. It was made clear that using babel to manage the js would make it far simpler to set up in a cross-browser situation, so you'll want to run `npm install` on installation and then `npm run build` when making edits. Improvements will be made to add watch tasks, but for now you'll need to rebuild to see changes.
+
 ### To-Do
 - When adding this field to a group, add 'req'd field' switches for the text entry fields.
 - Add options to determine which text fields are saved and which are just used for queries.
 - (This one might not work out) Allow the field to be saved as either JSON or to multiple postmeta fields.
 - Allow users to set a default location on field creation.
 - Allow users to have the map remain uninitialized until the text inputs are submitted.
+- Add 'watch' task to webpack.
