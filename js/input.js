@@ -3,7 +3,7 @@ import 'nodelist-foreach-polyfill'
 class MapboxGeojson {
   constructor (el) {
     this.el = el
-    this.key = el.attr('data-access-token')
+    this.key = (theme_vars.mapbox.key) ? theme_vars.mapbox.key : el.attr('data-access-token') // eslint-disable-line
     this.fieldKey = el.context.dataset.key
     this.map = null
     this.marker = null
@@ -15,8 +15,8 @@ class MapboxGeojson {
     this.city = document.querySelector('input.mapbox-geojson__city')
     this.state = document.querySelector('select.mapbox-geojson__state')
     this.zip = document.querySelector('input.mapbox-geojson__zip')
-    this.lat = '40.7249832'
-    this.lng = '-74.0082994'
+    this.lat = (theme_vars.mapbox.latitude) ? theme_vars.mapbox.latitude : '40.7249832' // eslint-disable-line
+    this.lng = (theme_vars.mapbox.longitude) ? theme_vars.mapbox.longitude : '-74.0082994' // eslint-disable-line
 
     // Check if there's already a value
     this.fromSaved = this.getValue()
@@ -64,6 +64,7 @@ class MapboxGeojson {
         }.json?access_token=${this.key}`
       )
       .then(res => {
+        console.log('!!!', res.data)
         this.marker.setLngLat([this.lng, this.lat]).addTo(this.map)
         this.setValue()
         icon.classList.remove('loading')
@@ -256,8 +257,8 @@ class MapboxGeojson {
   validateForm () {
     const cityInput = document.querySelector('input.mapbox-geojson__city')
     const stateInput = document.querySelector('select.mapbox-geojson__state')
-    const value = document.querySelector('input.mapbox-geojson-value')
-    let json = (value.value) ? JSON.parse(value.value) : null
+    const value = document.querySelector('input.mapbox-geojson-value').value
+    let json = (value) ? JSON.parse(value) : null
     const submitBtn = document.querySelector('.acf-form-submit input')
     let hasErrors = false
 
@@ -281,10 +282,12 @@ class MapboxGeojson {
       hasErrors = true
     }
 
-    if (hasErrors) {
-      submitBtn.disabled = true
-    } else {
-      submitBtn.disabled = false
+    if (submitBtn) {
+      if (hasErrors) {
+        submitBtn.disabled = true
+      } else {
+        submitBtn.disabled = false
+      }
     }
   }
 }

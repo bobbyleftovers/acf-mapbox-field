@@ -15,8 +15,8 @@
     "test:json_lint": "bash ../../../private/scripts/test_json.sh"
   },
   "devDependencies": {
-    "@barrelny/cli": "^1.0.7",
-    "@fortawesome/fontawesome-free": "^5.9.0",
+    "@barrelny/cli": "^1.0.8",
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "autoprefixer": "^7.2.6",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
@@ -46,7 +46,7 @@
     "postcss-import": "^10.0.0",
     "postcss-inline-svg": "^3.1.1",
     "postcss-loader": "^2.1.6",
-    "postcss-mixins": "^6.2.1",
+    "postcss-mixins": "^6.2.3",
     "postcss-sassy-mixins": "^2.1.0",
     "postcss-scss": "^2.0.0",
     "precss": "^2.0.0",
@@ -57,22 +57,22 @@
     "stylelint-webpack-plugin": "^0.10.5",
     "tweezer.js": "^1.5.0",
     "url-loader": "^1.1.2",
-    "vue-loader": "^15.4.2",
+    "vue-loader": "^15.7.2",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
-    "vuex": "^3.0.1",
-    "webpack": "^4.39.2"
+    "vuex": "^3.1.2",
+    "webpack": "^4.41.2"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@glidejs/glide": "^3.2.7",
+    "@babel/polyfill": "^7.7.0",
+    "@glidejs/glide": "^3.4.1",
     "axios": "^0.18.0",
     "cleave.js": "^1.5.3",
-    "mapbox-gl": "^1.1.0",
+    "mapbox-gl": "^1.6.0",
     "nodelist-foreach-polyfill": "^1.2.0",
     "scrollreveal": "^4.0.5",
     "url-search-params-polyfill": "^6.0.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.7"
+    "vue-router": "^3.1.3"
   }
 }
